@@ -3,9 +3,9 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../DDLSchema/DDLSchema.xsd">
  <MaterialSection label="CTPPS_Timing_Materials.xml">
-  <ElementaryMaterial name="PPS_Timing_Primary_Vacuum" density="1e-13*mg/cm3" symbol=" "
+  <ElementaryMaterial name="CTPPS_Timing_Primary_Vacuum" density="1e-13*mg/cm3" symbol=" "
    atomicWeight="1*g/mole" atomicNumber="1"/>
-  <ElementaryMaterial name="PPS_Timing_Secondary_Vacuum" density="1e-13*mg/cm3" symbol=" "
+  <ElementaryMaterial name="CTPPS_Timing_Secondary_Vacuum" density="1e-13*mg/cm3" symbol=" "
    atomicWeight="1*g/mole" atomicNumber="1"/>
   
   <ElementaryMaterial name="Carbon" density="2.265*g/cm3" symbol=" " atomicWeight="12.011*g/mole"

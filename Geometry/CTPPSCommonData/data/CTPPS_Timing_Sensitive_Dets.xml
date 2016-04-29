@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../DDLSchema/DDLSchema.xsd">
     <SpecParSection label="CTPPS_Timing_Sensitive_Dets.xml">
-        <SpecPar name="ROUHitsPPSTiming">
+        <SpecPar name="ROUHitsCTPPSTiming">
            <PartSelector path="//PhotoDetector_Window"/>
          <PartSelector path="//CTPPS_Timing_Lbar_.*:QLbar"/>
-      <!--   <PartSelector path="//PPS_Timing_Box_.*:BoxOFlbar"/>-->   
-          <Parameter name="SensitiveDetector" value="PPSTimingSensitiveDetector" eval="false"/>
-            <Parameter name="ReadOutName" value="PPSTimingHits" eval="false"/>
+      <!--   <PartSelector path="//CTPPS_Timing_Box_.*:BoxOFlbar"/>-->   
+          <Parameter name="SensitiveDetector" value="CTPPSTimingSensitiveDetector" eval="false"/>
+            <Parameter name="ReadOutName" value="CTPPSTimingHits" eval="false"/>
         </SpecPar>
     </SpecParSection>
 </DDDefinition>

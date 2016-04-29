@@ -4,8 +4,10 @@
 
 #include "DataFormats/GeometrySurface/interface/RectangularPlaneBounds.h"
 #include "DataFormats/GeometrySurface/interface/TrapezoidalPlaneBounds.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "Geometry/CommonDetUnit/interface/GlobalTrackingGeometry.h"
 #include "Geometry/CaloGeometry/interface/CaloGeometry.h"
+#include "Geometry/HGCalGeometry/interface/HGCalGeometry.h"
 #include "Geometry/CaloGeometry/interface/CaloCellGeometry.h"
 #include "Geometry/CSCGeometry/interface/CSCGeometry.h"
 #include "Geometry/DTGeometry/interface/DTGeometry.h"
@@ -63,43 +65,69 @@
       m_fwGeometry->idToName[rawid].topology[3] = topo->pitch();	\
     }									\
   }                                                                     \
+
+namespace {
+  static const std::array<std::string,3> hgcal_geom_names =  { { "HGCalEESensitive",
+                                                                 "HGCalHESiliconSensitive",
+                                                                 "HGCalHEScintillatorSensitive" } };
+}
 									  
-FWRecoGeometryESProducer::FWRecoGeometryESProducer( const edm::ParameterSet& )
+FWRecoGeometryESProducer::FWRecoGeometryESProducer( const edm::ParameterSet& pset )
   : m_current( -1 )
 {
+  m_tracker = pset.getUntrackedParameter<bool>( "Tracker", true );
+  m_muon = pset.getUntrackedParameter<bool>( "Muon", true );
+  m_calo = pset.getUntrackedParameter<bool>( "Calo", true );
   setWhatProduced( this );
 }
 
 FWRecoGeometryESProducer::~FWRecoGeometryESProducer( void )
 {}
 
-boost::shared_ptr<FWRecoGeometry> 
+std::shared_ptr<FWRecoGeometry> 
 FWRecoGeometryESProducer::produce( const FWRecoGeometryRecord& record )
 {
   using namespace edm;
 
-  m_fwGeometry =  boost::shared_ptr<FWRecoGeometry>( new FWRecoGeometry );
+  m_fwGeometry = std::make_shared<FWRecoGeometry>();
 
   record.getRecord<GlobalTrackingGeometryRecord>().get( m_geomRecord );
   
   DetId detId( DetId::Tracker, 0 );
   m_trackerGeom = (const TrackerGeometry*) m_geomRecord->slaveGeometry( detId );
   
-  record.getRecord<CaloGeometryRecord>().get( m_caloGeom );
-  
-  addPixelBarrelGeometry( );
-  addPixelForwardGeometry();
-  addTIBGeometry();
-  addTIDGeometry();
-  addTOBGeometry();
-  addTECGeometry();
-  addDTGeometry();
-  addCSCGeometry();
-  addRPCGeometry();
-  addGEMGeometry();
-  addME0Geometry();
-  addCaloGeometry();
+  if( m_tracker )
+  {
+    addPixelBarrelGeometry( );
+    addPixelForwardGeometry();
+    addTIBGeometry();
+    addTIDGeometry();
+    addTOBGeometry();
+    addTECGeometry();
+  }
+  if( m_muon )
+  {
+    addDTGeometry();
+    addCSCGeometry();
+    addRPCGeometry();
+    addGEMGeometry();
+    addME0Geometry();
+  }
+  if( m_calo )
+  {
+    record.getRecord<CaloGeometryRecord>().get( m_caloGeom );
+    edm::ESHandle<HGCalGeometry> test;
+    for( const auto& name : hgcal_geom_names ) {
+      const auto& calogr = record.getRecord<CaloGeometryRecord>();
+      calogr.getRecord<IdealGeometryRecord>().get( name , test );
+      if( test.isValid() ) {
+	m_hgcalGeoms.push_back(test);
+      }
+    }
 
+    addCaloGeometry();
+  }
+  
   m_fwGeometry->idToName.resize( m_current + 1 );
   std::vector<FWRecoGeom::Info>( m_fwGeometry->idToName ).swap( m_fwGeometry->idToName );
   std::sort( m_fwGeometry->idToName.begin(), m_fwGeometry->idToName.end());
@@ -469,6 +497,15 @@ FWRecoGeometryESProducer::addCaloGeometry( void )
     const CaloCellGeometry::CornersVec& cor( m_caloGeom->getGeometry( *it )->getCorners());
     unsigned int id = insert_id( it->rawId());
     fillPoints( id, cor.begin(), cor.end());
+  }
+  for( const auto& hgc : m_hgcalGeoms ) {
+    const auto& hgcprod = *hgc;
+    const auto& vid = hgcprod.getValidDetIds(); 
+    for( const auto& id : vid ) {
+      uint32_t intid = insert_id( id.rawId() );
+      const auto& cor = hgcprod.getCorners( id );
+      fillPoints( intid, cor.begin(), cor.end() );
+    }
   }
 }
 

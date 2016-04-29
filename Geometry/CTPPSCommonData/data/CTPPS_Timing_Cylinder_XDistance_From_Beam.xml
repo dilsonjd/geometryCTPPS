@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.cern.ch/mms/DDL ../DDLSchema.xsd">
     <ConstantsSection label="CTPPS_Timing_Cylinder_XDistance_From_Beam.xml">
 
- <Constant name="Cylinder_beam_distance" value="0*mm"/>
+ <Constant name="Cylinder_beam_distance" value="2*mm"/>
 
 
     </ConstantsSection>
