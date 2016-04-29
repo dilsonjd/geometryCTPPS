@@ -19,8 +19,8 @@ def help():
 def simGeoLoad(score):
     print "Loading configuration for tag ", options.tag ,"...\n"
     if score == "Run1CTPPS":
-               process.load("Configuration.TotemCommon.geometryRP_PPS_cfi")
-               process.XMLIdealGeometryESSource.geomXMLFiles.append('Geometry/VeryForwardData/data/2015_10_18_fill4511/RP_Dist_Beam_Cent.xml')
+               process.load("Configuration.TotemCommon.geometry_CTPPS_cfi")
+               #process.XMLIdealGeometryESSource.geomXMLFiles.append('Geometry/VeryForwardData/data/2015_10_18_fill4511/RP_Dist_Beam_Cent.xml')
                #process.XMLIdealGeometryESSource.geomXMLFiles.append('Geometry/CTPPSCommonData/data/2015_10_18_fill4511/RP_Dist_Beam_Cent.xml')
     elif score == "Run1":
        process.load("Geometry.CMSCommonData.cmsIdealGeometryXML_cfi")

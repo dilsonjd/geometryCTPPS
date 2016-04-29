@@ -2,47 +2,26 @@
 <DDDefinition xmlns="http://www.cern.ch/cms/DDL"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../DDLSchema/DDLSchema.xsd">
-    <ConstantsSection label="CTPPS_Stations_Assembly.xml">
-        <!--positions of the stations from the IP5 to the center of the station-->
-        <!--coordinate system is relative to CMS 1 (z>0) and 2 (z<0)-->
-        <Constant name="CTPPS_FirstTr_1_Station_Position_z"  value="203827*mm"/>
-        <Constant name="CTPPS_FirstTr_2_Station_Position_z"  value="-203827*mm"/>
-        <Constant name="CTPPS_SecondTr_1_Station_Position_z" value="212550*mm"/>
-        <Constant name="CTPPS_SecondTr_2_Station_Position_z" value="-212550*mm"/>
-        <Constant name="CTPPS_Timing_1_Station_Position_z"   value="215700*mm"/>
-        <Constant name="CTPPS_Timing_2_Station_Position_z"   value="-215700*mm"/>
+    <ConstantsSection label="RP_Stations_Assembly.xml">
+        <!--positions of the stations from the IP5 to the first element of the station-->
+        <Constant name="CTPPS_Tracker_Negative_Station_Position_z" value="-202769*mm"/>
+        <Constant name="CTPPS_Tracker_Positive_Station_Position_z" value="202769*mm"/>
+        <Constant name="CTPPS_Tracker_Negative_Station_endZ" value="-214020*mm"/>
+        <Constant name="CTPPS_Tracker_Positive_Station_endZ" value="214020*mm"/>
+        <!-- +-1500 mm for the two 220 m stations outside the IP-->
     </ConstantsSection>
     
-    <PosPartSection label="CTPPS_Stations_Assembly.xml">
+    <PosPartSection label="RP_Stations_Assembly.xml">
+<!---->
         <PosPart copyNumber="1">
-            <rParent name="CTPPS_Global:VF200_2"/>
-            <rChild name="CTPPS_FirstTr_2_Station:CTPPS_FirstTr_2_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_FirstTr_2_Station_Position_z]+[CTPPS_Global:VF200Z]"/>
+            <rParent name="cms:CMSE"/>
+            <rChild name="CTPPS_Tracker_Positive_Station:CTPPS_Tracker_Positive_Station"/>
+            <Translation x="0*mm" y="0*mm" z="[CTPPS_Tracker_Positive_Station_Position_z]+[CTPPS_Tracker_Positive_Station:CTPPS_Tracker_Positive_Station_Length]/2"/>
         </PosPart>
         <PosPart copyNumber="1">
-            <rParent name="CTPPS_Global:VF200_2"/>
-            <rChild name="CTPPS_SecondTr_2_Station:CTPPS_SecondTr_2_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_SecondTr_2_Station_Position_z]+[CTPPS_Global:VF200Z]"/>
-        </PosPart>
-        <PosPart copyNumber="1">
-          <rParent name="CTPPS_Global:VF200_2"/>   
-            <rChild name="CTPPS_Timing_2_Station:CTPPS_Timing_2_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_Timing_2_Station_Position_z]+[CTPPS_Global:VF200Z]"/>
-        </PosPart>
-        <PosPart copyNumber="1">
-            <rParent name="CTPPS_Global:VF200_1"/>
-            <rChild name="CTPPS_FirstTr_1_Station:CTPPS_FirstTr_1_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_FirstTr_1_Station_Position_z]-[CTPPS_Global:VF200Z]"/>
-        </PosPart>
-        <PosPart copyNumber="1">
-            <rParent name="CTPPS_Global:VF200_1"/>
-            <rChild name="CTPPS_SecondTr_1_Station:CTPPS_SecondTr_1_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_SecondTr_1_Station_Position_z]-[CTPPS_Global:VF200Z]"/>
-        </PosPart>
-        <PosPart copyNumber="1">
-            <rParent name="CTPPS_Global:VF200_1"/>
-            <rChild name="CTPPS_Timing_1_Station:CTPPS_Timing_1_Station"/>
-            <Translation x="0*mm" y="0*mm" z="[CTPPS_Timing_1_Station_Position_z]-[CTPPS_Global:VF200Z]"/>
+            <rParent name="cms:CMSE"/>
+            <rChild name="CTPPS_Tracker_Negative_Station:CTPPS_Tracker_Negative_Station"/>
+            <Translation x="0*mm" y="0*mm" z="[CTPPS_Tracker_Negative_Station_Position_z]-[CTPPS_Tracker_Negative_Station:CTPPS_Tracker_Negative_Station_Length]/2"/>
         </PosPart>
     </PosPartSection>
 </DDDefinition>

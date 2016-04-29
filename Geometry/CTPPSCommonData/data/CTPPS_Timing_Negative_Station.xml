@@ -62,7 +62,7 @@
      <rParent name="CTPPS_Timing_Negative_Station_Vacuum_4"/>
      <rChild name="CTPPS_Timing_Box_Negative:CTPPS_Timing_Cylinder_Primary_Vacuum"/>
         <rRotation name="CTPPS_Timing_Transformations:CTPPS_Timing_90_z_90_y_rot"/>
-        <Translation x="[CTPPS_Timing_Horizontal_Pot:height]/2+[CTPPS_Timing_Cylinder_XDistance_From_Beam:Cylinder_beam_distance]" y="0*m " z="0*m " />
+        <Translation x="[CTPPS_Timing_Horizontal_Pot:height]/2+[CTPPS_XDistance_From_Beam:CTPPS_Timing_Positive_Det_Dist]" y="0*m " z="0*m " />
 </PosPart>
 
         <PosPart>

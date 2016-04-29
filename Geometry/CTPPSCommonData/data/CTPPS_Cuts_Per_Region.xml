@@ -2,13 +2,10 @@
 <DDDefinition xmlns="http://www.cern.ch/cms/DDL"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.cern.ch/cms/DDL ../../DDLSchema/DDLSchema.xsd">
-  <SpecParSection label="CTPPS_Cuts_Per_Region.xml" eval="true">
+  <SpecParSection label="RP_Cuts_Per_Region.xml" eval="true">
     <SpecPar name="RP_Silicon_Detectors_Range_Cuts">
       <PartSelector path="//RP_Silicon_Detector"/>
       <Parameter name="CMSCutsRegion" value="RPSiliconDetectorsCuts" eval="false"/>
-      <!--Parameter name="ProdCutsForElectrons" value="0.10*mm"/>
-      <Parameter name="ProdCutsForPositrons" value="0.10*mm"/>
-      <Parameter name="ProdCutsForGamma" value="0.10*mm"/-->
       <Parameter name="ProdCutsForElectrons" value="0.1*mm"/>
       <Parameter name="ProdCutsForPositrons" value="0.1*mm"/>
       <Parameter name="ProdCutsForGamma" value="0.1*mm"/>
@@ -29,15 +26,14 @@
       <Parameter name="ProdCutsForGamma" value="10*mm"/>
     </SpecPar>
     <SpecPar name="RP_Other_Det_Parts_Range_Cuts">
+      <PartSelector path="//RP_Device_Vert_Corp_3"/>
       <PartSelector path="//RP_Device_Hor_Corp_3"/>
-      <PartSelector path="//CTPPS_FirstTr_2_Station_Tube_3"/>
-      <PartSelector path="//CTPPS_FirstTr_2_Station_Tube_1"/>
-      <PartSelector path="//CTPPS_FirstTr_1_Station_Tube_3"/>
-      <PartSelector path="//CTPPS_FirstTr_1_Station_Tube_1"/>
-      <PartSelector path="//CTPPS_SecondTr_2_Station_Tube_3"/>
-      <PartSelector path="//CTPPS_SecondTr_2_Station_Tube_1"/>
-      <PartSelector path="//CTPPS_SecondTr_1_Station_Tube_3"/>
-      <PartSelector path="//CTPPS_SecondTr_1_Station_Tube_1"/>
+      <PartSelector path="//CTPPS_Tracker_Positive_Station_Tube_5"/>
+      <PartSelector path="//CTPPS_Tracker_Positive_Station_Tube_3"/>
+      <PartSelector path="//CTPPS_Tracker_Positive_Station_Tube_1"/>
+      <PartSelector path="//CTPPS_Tracker_Negative_Station_Tube_5"/>
+      <PartSelector path="//CTPPS_Tracker_Negative_Station_Tube_3"/>
+      <PartSelector path="//CTPPS_Tracker_Negative_Station_Tube_1"/>
       <Parameter name="CMSCutsRegion" value="RPOtherDetPartsCuts" eval="false"/>
       <Parameter name="ProdCutsForElectrons" value="10*mm"/>
       <Parameter name="ProdCutsForPositrons" value="10*mm"/>
@@ -46,10 +42,8 @@
     <SpecPar name="RP_Non_dense_materials_cuts">
       <PartSelector path="//.*:RP_box_primary_vacuum"/>
       <PartSelector path="//.*:RP_box_secondary_vacuum"/>
-      <PartSelector path="//CTPPS_FirstTr_2_Station_Vacuum_5"/>
-      <PartSelector path="//CTPPS_FirstTr_1_Station_Vacuum_5"/>
-      <PartSelector path="//CTPPS_SecondTr_2_Station_Vacuum_5"/>
-      <PartSelector path="//CTPPS_SecondTr_1_Station_Vacuum_5"/>
+      <PartSelector path="//CTPPS_Tracker_Positive_Station_Vacuum_5"/>
+      <PartSelector path="//CTPPS_Tracker_Negative_Station_Vacuum_5"/>
       <Parameter name="CMSCutsRegion" value="RP_NonDenseMaterialsCuts" eval="false"/>
       <Parameter name="ProdCutsForElectrons" value="50*m"/>
       <Parameter name="ProdCutsForPositrons" value="50*m"/>
